@@ -119,7 +119,7 @@ php_engine *engine_init(void) {
 	engine_module.ini_entries = malloc(sizeof(engine_ini_defaults));
 	memcpy(engine_module.ini_entries, engine_ini_defaults, sizeof(engine_ini_defaults));
 
-	if (php_module_startup(&engine_module, NULL, 0) == FAILURE) {
+	if (php_module_startup(&engine_module, NULL) == FAILURE) {
 		sapi_shutdown();
 
 		errno = 1;

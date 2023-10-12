@@ -46,7 +46,6 @@ void context_exec(engine_context *context, char *filename) {
 		script.type = ZEND_HANDLE_FILENAME;
 		script.filename = filename;
 		script.opened_path = NULL;
-		script.free_filename = 0;
 
 		ret = php_execute_script(&script);
 	} zend_catch {
@@ -71,7 +70,7 @@ void *context_eval(engine_context *context, char *script) {
 	uint32_t compiler_options = CG(compiler_options);
 
 	CG(compiler_options) = ZEND_COMPILE_DEFAULT_FOR_EVAL;
-	zend_op_array *op = zend_compile_string(str, "gophp-engine");
+	zend_op_array *op = zend_compile_string(str, "gophp-engine", 0);
 	CG(compiler_options) = compiler_options;
 
 	zval_dtor(str);

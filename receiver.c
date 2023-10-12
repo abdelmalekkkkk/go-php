@@ -104,7 +104,7 @@ static void receiver_new(INTERNAL_FUNCTION_PARAMETERS) {
 static zend_internal_function *receiver_method_get(zend_object *object) {
 	zend_internal_function *func = emalloc(sizeof(zend_internal_function));
 
-	func->type     = ZEND_OVERLOADED_FUNCTION;
+	func->type     = ZEND_INTERNAL_FUNCTION;
 	func->handler  = NULL;
 	func->arg_info = NULL;
 	func->num_args = 0;
@@ -133,7 +133,7 @@ static zend_internal_function *receiver_constructor_get(zend_object *object) {
 
 // Table of handler functions for method receivers.
 static zend_object_handlers receiver_handlers = {
-	ZEND_OBJECTS_STORE_HANDLERS,
+	0,
 
 	_receiver_get,           // read_property
 	_receiver_set,           // write_property
